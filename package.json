@@ -1,0 +1,25 @@
+{
+  "name": "books-api",
+  "version": "1.0.0",
+  "description": "Tutorial de NodeJS: https://www.youtube.com/watch?v=l4glc0XNVbM&list=PLz_YTBuxtxt74aOA2W8ArqZpsPlxP-JC9",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oberziner/books-api-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oberziner/books-api-nodejs/issues"
+  },
+  "homepage": "https://github.com/oberziner/books-api-nodejs#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "express": "^4.16.3"
+  }
+}

@@ -1,16 +1,14 @@
-export default (sequelize, DataType) => {
-  return sequelize.define('Books', {
-    id: {
-      type: DataType.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+export default (sequelize, DataType) => sequelize.define('Books', {
+  id: {
+    type: DataType.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  name: {
+    type: DataType.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
     },
-    name: {
-      type: DataType.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    }
-  });
-}
+  },
+});

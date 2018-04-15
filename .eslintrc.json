@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "no-console": "off"
+  },
+  "extends": "airbnb",
+  "globals": {
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "request": true,
+    "beforeEach": true,
+    "app": true
+  }
+}

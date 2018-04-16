@@ -1,4 +1,4 @@
-import BooksController from '../controllers/books';
+// import BooksController from '../controllers/books';
 
 export default (app, Books) => {
   app.route('/books')

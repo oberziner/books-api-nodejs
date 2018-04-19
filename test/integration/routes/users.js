@@ -1,5 +1,14 @@
+import jwt from 'jwt-simple';
+
 describe('Routes Users', () => {
   const { Users } = app.datasource.models;
+  const { jwtSecret } = app.config;
+  const firstUser = {
+    name: 'First User',
+    email: 'first@mail.com',
+    password: 'first',
+  };
+
   const defaultUser = {
     id: 1,
     name: 'Default User',
@@ -7,9 +16,15 @@ describe('Routes Users', () => {
     password: 'test',
   };
 
+  let token;
+
   beforeEach((done) => {
     Users
       .destroy({ where: {} })
+      .then(() => Users.create(firstUser))
+      .then((user) => {
+        token = jwt.encode({ id: user.id }, jwtSecret);
+      })
       .then(() => Users.create(defaultUser))
       .then(() => done());
   });
@@ -18,6 +33,7 @@ describe('Routes Users', () => {
     it('should return a list of users', (done) => {
       request
         .get('/users')
+        .set('Authorization', `bearer ${token}`)
         .end((err, res) => {
           expect(res.body[0].id).to.be.eql(defaultUser.id);
           expect(res.body[0].name).to.be.eql(defaultUser.name);
@@ -32,6 +48,7 @@ describe('Routes Users', () => {
     it('should return a a users', (done) => {
       request
         .get('/users/1')
+        .set('Authorization', `bearer ${token}`)
         .end((err, res) => {
           expect(res.body.id).to.be.eql(defaultUser.id);
           expect(res.body.name).to.be.eql(defaultUser.name);
@@ -54,6 +71,7 @@ describe('Routes Users', () => {
       request
         .post('/users')
         .send(newUser)
+        .set('Authorization', `bearer ${token}`)
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(201);
           expect(res.body.id).to.be.eql(newUser.id);
@@ -76,6 +94,7 @@ describe('Routes Users', () => {
       request
         .put('/users/1')
         .send(updatedUser)
+        .set('Authorization', `bearer ${token}`)
         .end((err, res) => {
           expect(res.body).to.be.eql([1]);
 
@@ -88,6 +107,7 @@ describe('Routes Users', () => {
     it('should delete a user', (done) => {
       request
         .delete('/users/1')
+        .set('Authorization', `bearer ${token}`)
         .end((err, res) => {
           expect(res.statusCode).to.be.eql(204);
 
